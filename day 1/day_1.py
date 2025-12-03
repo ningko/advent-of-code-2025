@@ -19,7 +19,7 @@ for element in arr:
         if dial == 0:
             zeros = zeros + 1
 
-print (zeros)
+print(zeros)
 
 # part 2
 dial = 50
@@ -38,4 +38,4 @@ for element in arr:
             if dial == 0:
                 clicks = clicks + 1
 
-print (clicks)
+print(clicks)
