@@ -8,6 +8,7 @@ spans = []
 in_span = False
 start = None
 
+# part 1
 for col in range(width):
     col_has_char = any(grid[row][col] != ' ' for row in range(len(grid)))
     if col_has_char:
@@ -60,3 +61,36 @@ for nums, operator in problems:
     total += value
 
 print(total)
+
+# part 2
+total_p2 = 0
+
+for s, e in spans:
+    nums = []
+
+    for col in range(e - 1, s - 1, -1):
+        digits = []
+
+        for row in range(4):
+            ch = grid[row][col]
+            if ch != ' ':
+                digits.append(ch)
+            
+        if digits:
+            num = int(''.join(digits))
+            nums.append(num)
+    
+    operator = grid[4][s:e].strip()
+    if operator not in ('+', '*'):
+        continue
+
+    if operator == '+':
+        value = sum(nums)
+    else: 
+        value = 1
+        for n in nums:
+            value *= n
+        
+    total_p2 += value
+
+print(total_p2)
