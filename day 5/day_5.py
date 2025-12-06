@@ -15,6 +15,7 @@ for i in ran:
 for i in second_arr:
     available_ids.append(int(i))
 
+# part 1
 fresh = 0
 spoiled = 0
 
@@ -33,3 +34,24 @@ for available_id in available_ids:
 
 
 print(fresh)
+
+# part 2
+fresh_ids.sort()
+intervals = []
+lo, hi = fresh_ids[0]
+
+for x, y in fresh_ids[1:]:
+    if x <= hi + 1:
+        hi = max(hi, y)
+    else:
+        intervals.append((lo, hi))
+        lo, hi = x, y
+
+intervals.append((lo, hi))
+
+total = 0
+
+for l, h in intervals:
+    total += (h - l + 1)
+    
+print(total)
