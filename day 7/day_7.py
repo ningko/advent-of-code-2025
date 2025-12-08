@@ -9,6 +9,7 @@ start_col = None
 start_row = None
 splits = 0
 
+# part 1
 for r in range(rows):
     for c in range(cols):
         if matrix[r][c] == 'S':
@@ -42,3 +43,28 @@ for r in range(start_row + 1, rows):
         break
 
 print(splits)
+
+# part 2
+active = {start_col: 1}
+
+for r in range(start_row + 1, rows):
+    if not active:
+        break
+    next_active = {}
+    row = matrix[r]
+
+    for c, count in active.items():
+        if c < 0 or c >= cols:
+            continue
+        if row[c] == '^':
+            if c - 1 >= 0:
+                next_active[c - 1] = next_active.get(c - 1, 0) + count
+            if c + 1 < cols:
+                next_active[c + 1] = next_active.get(c + 1, 0) + count
+        else:
+            next_active[c] = next_active.get(c, 0) + count
+    active = next_active
+
+total_timelines = sum(active.values())
+
+print(total_timelines)
